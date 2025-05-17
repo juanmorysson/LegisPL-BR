@@ -10,7 +10,7 @@ nltk.download('stopwords')
 stopwords_pt = stopwords.words('portuguese')
 
 # Carregar ementas
-df = pd.read_excel("projetos_PL_2024_completo.xlsx")  # ou outro nome de arquivo
+df = pd.read_excel("projetos_PL_2024_transformado.xlsx")  # ou outro nome de arquivo
 ementas = df['ementa'].fillna("")
 
 # Vetorização TF-IDF

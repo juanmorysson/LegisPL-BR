@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import umap.umap_ as umap
 
 # Carregar dados
-df = pd.read_excel("projetos_PL_2024_completo.xlsx")
+df = pd.read_excel("projetos_PL_2024_transformado.xlsx")
 ementas = df['ementa'].fillna("").tolist()
 
 # SBERT: transformer para sentenças em português

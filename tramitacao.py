@@ -44,16 +44,33 @@ def obter_proposicoes(ano, sigla_tipo="PL"):
 
 def obter_autores(id_proposicao):
     url = f"{BASE_URL}/proposicoes/{id_proposicao}/autores"
+    headers = {"accept": "application/json"}
     try:
-        resp = requests.get(url, headers={"accept": "application/json"})
+        resp = requests.get(url, headers=headers)
         if resp.status_code != 200:
             return {"autores": "Erro", "tipo_autor": "Erro"}
 
         autores = resp.json()["dados"]
-        nomes = [
-            f"{a['nome']} ({a.get('partido','?')}-{a.get('uf','?')})"
-            for a in autores if a.get("nome")
-        ]
+        nomes = []
+
+        for a in autores:
+            nome = a.get("nome", "").strip()
+            uri_autor = a.get("uri")
+            partido = "?"
+            uf = "?"
+
+            if uri_autor:
+                try:
+                    r_info = requests.get(uri_autor, headers=headers)
+                    if r_info.status_code == 200:
+                        dados_autor = r_info.json().get("dados", {})
+                        ultimo_status = dados_autor.get("ultimoStatus", {})
+                        partido = ultimo_status.get("siglaPartido", "?")
+                        uf = ultimo_status.get("siglaUf", "?")
+                except:
+                    pass
+            if nome:
+                nomes.append(f"{nome} ({partido}-{uf})")
         tipos = list(set(a.get("tipo", "") for a in autores if a.get("tipo")))
         tipo_autor = ", ".join(tipos) if tipos else "Não especificado"
         return {

@@ -30,7 +30,7 @@ mapa_temas = {
     "imposto": "Economia",
     "tributação": "Economia",
     "financiamento": "Economia",
-    "trabalho": "Direitos Trabalhistas",
+    "trabalho": "Direitos Humanos",
     "mulher": "Direitos Humanos",
     "violência": "Segurança Pública",
     "segurança": "Segurança Pública",
@@ -59,7 +59,7 @@ def extrair_uf_principal(autores_str):
     if pd.isna(autores_str):
         return None
     try:
-        ufs = [a.strip()[-3:-1] for a in autores_str.split("),") if "-" in a]
+        ufs = [a.strip().split("-")[-1].replace(")", "").strip() for a in autores_str.split("),") if "-" in a]
         if ufs:
             return ufs[0]
     except:
