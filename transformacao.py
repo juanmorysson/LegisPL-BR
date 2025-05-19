@@ -7,15 +7,15 @@ from datetime import datetime
 
 def foi_finalizado(status):
     finais = [
-        "Arquivada", "Transformada em norma jurídica", "Rejeitada",
-        "Retirada", "Declarada prejudicada", "Encerrada"
+        "arquivada", "transformada em norma jurídica", "rejeitada",
+        "retirada", "declarada prejudicada", "encerrada"
     ]
     if pd.isna(status):
         return False
     return any(p.lower() in status.lower() for p in finais)
 
 def foi_aprovado(status):
-    termos = ["transformada em norma", "transformado em lei", "promulgado", "sanção"]
+    termos = ["transformada em norma", "transformado em norma jurídica", "transformado em lei", "promulgado", "sanção"]
     if pd.isna(status):
         return False
     return any(t in status.lower() for t in termos)
@@ -74,9 +74,10 @@ partido_para_bloco = {
     "PT": "Esquerda", "PSOL": "Esquerda", "PCdoB": "Esquerda", "REDE": "Esquerda",
     "PSB": "Esquerda", "PDT": "Esquerda", "PV": "Esquerda",
     "MDB": "Centrão", "PSD": "Centrão", "PP": "Centrão", "PL": "Centrão",
-    "Republicanos": "Centrão", "União Brasil": "Centrão", "Avante": "Centrão",
-    "Podemos": "Centrão", "Solidariedade": "Centrão", "Patriota": "Centrão", "PROS": "Centrão",
-    "Novo": "Direita", "PSC": "Direita", "DEM": "Direita", "PSL": "Direita", "PRTB": "Direita"
+    "REPUBLICANOS": "Direita", "UNIÃO": "Centrão", "AVANTE": "Centrão", "CIDADANIA": "Centrão",
+    "PODE": "Centrão", "SOLIDARIEDADE": "Centrão", "PATRIOTA": "Centrão", "PROS": "Centrão", "PRD": "Centrão",
+    "NOVO": "Direita", "PSC": "Direita", "DEM": "Direita", "PSL": "Direita",
+    "PRTB": "Direita", "PTB": "Direita", "PSDB": "Direita",
 }
 
 def extrair_partido_principal(autores_str):

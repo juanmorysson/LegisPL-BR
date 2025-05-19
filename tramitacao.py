@@ -132,7 +132,7 @@ def obter_keywords(id_proposicao):
         if resp.status_code != 200:
             return "Erro"
         temas = resp.json()["dados"]
-        return ", ".join(t['nome'] for t in temas if "nome" in t) or "Sem temas"
+        return ", ".join(t['tema'] for t in temas if "tema" in t) or "Sem temas"
     except Exception as e:
         return f"Erro: {e}"
 
@@ -163,6 +163,7 @@ def main():
 
             prop["status atual"] = obter_status_proposicao(prop["id"])
             prop["temas"] = obter_keywords(prop["id"])
+
 
             time.sleep(0.5)
 
