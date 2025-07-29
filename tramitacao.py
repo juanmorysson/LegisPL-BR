@@ -137,7 +137,7 @@ def obter_keywords(id_proposicao):
         return f"Erro: {e}"
 
 def main():
-    anos = [2022, 2023, 2024]
+    anos = [2021, 2022, 2023, 2024]
     tipo = "PL"
     todas_proposicoes = []
 
@@ -170,8 +170,8 @@ def main():
         todas_proposicoes.extend(proposicoes)
 
     df = pd.DataFrame(todas_proposicoes)
-    df.to_excel(f"projetos_{tipo}_2022_2024_completo.xlsx", index=False)
-    print("Arquivo salvo como 'projetos_PL_2022_2024_completo.xlsx'")
+    df.to_excel(f"projetos_{tipo}_2021_2024_completo.xlsx", index=False)
+    print("Arquivo salvo como 'projetos_PL_2021_2024_completo.xlsx'")
 
 if __name__ == "__main__":
     main()
